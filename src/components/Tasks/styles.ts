@@ -46,13 +46,15 @@ export const styles = StyleSheet.create({
     empty: {
         borderTopWidth: 1,
         borderTopColor: '#333333',
-        marginTop: 48,
         display: "flex",
         flexDirection: 'column',
         justifyContent: "center",
         alignItems: 'center',
         color: '#808080',
         gap: 16
+    },
+    emptyImage: {
+        marginTop: 48
     },
     emptycontent: {},
     emptytext: {

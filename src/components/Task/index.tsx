@@ -1,7 +1,9 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
-import { ITask } from "../Tasks";
-import { CheckCircle, Circle, Trash } from "phosphor-react-native";
+
+import { CheckCircle, Trash } from "phosphor-react-native";
+import { ITask, TaskContext } from "../../contexts/TaskContext";
+import { useContext } from "react";
 
 interface Props {
     task: ITask
@@ -9,10 +11,13 @@ interface Props {
 
 
 export function Task({ task }: Props) {
+    const { onToggleTaskById, onDeleteTask } = useContext(TaskContext)
     const taskCompleted = task.isCompleted && { ...styles.iscompleted }
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.checkbutton} onPress={() => { }}>
+            <TouchableOpacity
+                style={styles.checkbutton}
+                onPress={() => { onToggleTaskById(task.id) }}>
                 {task.isCompleted ?
                     <CheckCircle
                         size={22}
@@ -23,7 +28,9 @@ export function Task({ task }: Props) {
                     <View style={styles.checkbuttondiv} />}
             </TouchableOpacity>
             <Text style={{ ...styles.text, ...taskCompleted }}>{task.description}</Text>
-            <TouchableOpacity style={styles.deletebutton} onPress={() => { }}>
+            <TouchableOpacity
+                style={styles.deletebutton}
+                onPress={() => { onDeleteTask(task.id) }}>
 
                 <Trash
                     size={22}
