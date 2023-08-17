@@ -1,0 +1,37 @@
+import { View, Text, TouchableOpacity } from "react-native";
+import { styles } from "./styles";
+import { ITask } from "../Tasks";
+import { CheckCircle, Circle, Trash } from "phosphor-react-native";
+
+interface Props {
+    task: ITask
+}
+
+
+export function Task({ task }: Props) {
+    const taskCompleted = task.isCompleted && { ...styles.iscompleted }
+    return (
+        <View style={styles.container}>
+            <TouchableOpacity style={styles.checkbutton} onPress={() => { }}>
+                {task.isCompleted ?
+                    <CheckCircle
+                        size={22}
+                        weight="fill"
+                        style={styles.checkbuttonSVG}
+                        color="#5e60ce"
+                    /> :
+                    <View style={styles.checkbuttondiv} />}
+            </TouchableOpacity>
+            <Text style={{ ...styles.text, ...taskCompleted }}>{task.description}</Text>
+            <TouchableOpacity style={styles.deletebutton} onPress={() => { }}>
+
+                <Trash
+                    size={22}
+                    style={styles.checkbuttonSVG}
+                    color="#808080"
+                />
+
+            </TouchableOpacity>
+        </View>
+    )
+}
